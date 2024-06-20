@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:st="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="App_CF.View.NewsDetailPage">
+    <Grid HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Image Aspect="AspectFill" 
+               Grid.Row="0"
+                   Source="{Binding Imagen}"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   st:Transition.Name="PropertyImage"/>
+            <ImageButton BackgroundColor="Transparent"
+                         Aspect="Fill"
+                         Source="back.png"
+                         Margin="25"
+                         WidthRequest="30"
+                         HeightRequest="30"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Start"
+                         Command="{Binding GoBackCommand}"/>
+
+        <pv:PancakeView x:Name="DetailsView"
+                        Grid.Row="1"
+                        CornerRadius="30,30,0,0"
+                        Padding="35,35,35,0"
+                        Margin="0,-40,0,0"
+                        BackgroundColor="White"
+                        VerticalOptions="FillAndExpand">
+            <ScrollView HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        VerticalScrollBarVisibility="Never">
+                <StackLayout Spacing="15"
+                             HorizontalOptions="FillAndExpand">
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal"
+                                     Spacing="5"
+                                     HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Model.Titulo}"
+                                   FontSize="20"
+                                   TextColor="Black"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+                    <StackLayout Grid.Row="1"
+                                 Spacing="15">
+                        <Label Text="{Binding Model.Subtitulo}"
+                               FontSize="15"
+                               TextColor="#515151"/>
+                        <StackLayout Orientation="Horizontal"
+                                     Spacing="10">
+                            <Label Text="{Binding Model.FechaCreacionAuditoria}"
+                                   FontSize="12"
+                                   TextColor="#707070"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <BoxView HeightRequest="1"
+                             VerticalOptions="Start"
+                             HorizontalOptions="FillAndExpand"
+                             BackgroundColor="#E4E4E4"/>
+                    <WebView HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"
+                             HeightRequest="1000">
+                        <WebView.Source>
+                            <HtmlWebViewSource Html="{Binding Contenido}" />
+                        </WebView.Source>
+                    </WebView>
+                </StackLayout>
+            </ScrollView>
+        </pv:PancakeView>
+    </Grid>
+</ContentPage>

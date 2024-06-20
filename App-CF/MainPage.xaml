@@ -1,0 +1,178 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="App_CF.MainPage">
+    <Grid HorizontalOptions="FillAndExpand" 
+          VerticalOptions="FillAndExpand">
+        <Image Aspect="AspectFill" 
+               Source="bg.jpg" 
+               HorizontalOptions="FillAndExpand" 
+               VerticalOptions="FillAndExpand"/>
+        <BoxView BackgroundColor="#A1A1A1" 
+                 Opacity="0.9"
+                 IsEnabled="False">
+        </BoxView>
+        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+            <SwipeView x:Name="MainSwipeView" 
+                       BackgroundColor="Transparent"
+                       IsEnabled="False">
+                <SwipeView.LeftItems>
+                    <SwipeItems>
+                        <SwipeItemView>
+                            <SwipeItemView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OpenSwipe"/>
+                            </SwipeItemView.GestureRecognizers>
+                            <Grid>
+                                <StackLayout Spacing="20"
+                                             Padding="35"
+                                             WidthRequest="250"
+                                             BindableLayout.ItemsSource="{Binding Menu}"
+                                             VerticalOptions="CenterAndExpand">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout Orientation="Horizontal">
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Command}"
+                                                                          Tapped="OpenSwipe"/>
+                                                </StackLayout.GestureRecognizers>
+                                                <pv:PancakeView BackgroundColor="#557ED2"
+                                                                HeightRequest="30"
+                                                                WidthRequest="30"
+                                                                CornerRadius="15"
+                                                                VerticalOptions="Center"
+                                                                HorizontalOptions="Start">
+                                                    <Image Source="{Binding Icon}"
+                                                           HeightRequest="15"
+                                                           WidthRequest="15"
+                                                           VerticalOptions="Center"
+                                                           HorizontalOptions="Center"/>
+                                                </pv:PancakeView>
+                                                <Label Text="{Binding Name}"
+                                                       TextColor="White"
+                                                       FontSize="15"
+                                                       FontAttributes="Bold"
+                                                       HorizontalOptions="Start"
+                                                       VerticalOptions="Center"/>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </Grid>
+                        </SwipeItemView>
+                    </SwipeItems>
+                </SwipeView.LeftItems>
+                <Grid x:Name="swipeContent">
+                    <pv:PancakeView x:Name="pancake" BackgroundColor="White">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="200"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Padding="30" BackgroundColor="#A1A1A1">
+                                <Image Source="menu.png" HeightRequest="25" HorizontalOptions="Start">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OpenSwipe"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Text="Grupo Castro Fallas" TextColor="Red" HorizontalOptions="Center" FontSize="25"/>
+                                <ImageButton Source="profile.png"
+                                             x:Name="btnLogin"
+                                             Command="{Binding LoginCommand}"
+                                             WidthRequest="35"
+                                             HeightRequest="35" 
+                                             BackgroundColor="Transparent"
+                                             HorizontalOptions="End"/>
+                            </Grid>
+                            <StackLayout Grid.Row="1" Margin="0,20,0,0">
+                                <Label Text="Noticias recientes" 
+                                       FontSize="30" 
+                                       FontAttributes="Bold" 
+                                       HorizontalOptions="Center" 
+                                       TextColor="Black"/>
+                                <CollectionView ItemsSource="{Binding LatestNews}"
+                                                x:Name="ListLatestNews"
+                                                Margin="0">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"
+                                                         HorizontalItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <pv:PancakeView BackgroundColor="White"
+                                                            CornerRadius="20"
+                                                            Margin="10"
+                                                            Padding="10">
+                                                <AbsoluteLayout>
+                                                    <Image Source="{Binding Imagen}" 
+                                                           Aspect="AspectFill" 
+                                                           HeightRequest="80" 
+                                                           WidthRequest="80"
+                                                           AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                                           AbsoluteLayout.LayoutFlags="All">
+                                                        <Image.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={x:Reference ListLatestNews}, Path=BindingContext.DetalleCommand}" CommandParameter="{Binding .}"/>
+                                                        </Image.GestureRecognizers>
+                                                    </Image>
+                                                </AbsoluteLayout>
+                                            </pv:PancakeView>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                            <StackLayout Grid.Row="2" Margin="0,20,0,0">
+                                <Label Text="Noticias" 
+                                       FontSize="30" 
+                                       FontAttributes="Bold" 
+                                       HorizontalOptions="Center" 
+                                       TextColor="Black"/>
+                                <CollectionView ItemsSource="{Binding News}"
+                                                x:Name="ListNews"
+                                                Margin="0">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Vertical"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <pv:PancakeView BackgroundColor="White"
+                                                            CornerRadius="20"
+                                                            Margin="10"
+                                                            Padding="10">
+                                                <Grid ColumnDefinitions="auto, *"
+                                                      RowDefinitions="auto, auto">
+                                                    <Image Source="{Binding Imagen}" 
+                                                           Aspect="AspectFill" 
+                                                           HeightRequest="80" 
+                                                           WidthRequest="80"
+                                                           Grid.RowSpan="2"/>
+                                                    <Label Text="{Binding Titulo}" 
+                                                           FontAttributes="Bold" 
+                                                           FontSize="16" 
+                                                           TextColor="Black" 
+                                                           Grid.Column="1"
+                                                           Margin="10, 0, 0, 0"/>
+                                                    <Label Text="{Binding Subtitulo}" 
+                                                           FontSize="14" 
+                                                           TextColor="Gray" 
+                                                           Grid.Column="1"
+                                                           Grid.Row="1"
+                                                           Margin="10, 5, 0, 0"/>
+                                                    <Grid.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Source={x:Reference ListNews}, Path=BindingContext.DetalleCommand}" CommandParameter="{Binding .}"/>
+                                                    </Grid.GestureRecognizers>
+                                                </Grid>
+                                            </pv:PancakeView>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </Grid>
+                    </pv:PancakeView>
+                </Grid>
+            </SwipeView>
+        </RefreshView>
+    </Grid>
+</ContentPage>
