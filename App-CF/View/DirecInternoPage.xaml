@@ -1,12 +1,109 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
              x:Class="App_CF.View.DirecInternoPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <Grid BackgroundColor="LightGray"
+          RowSpacing="0"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Padding="30" BackgroundColor="#A1A1A1">
+            <Image Source="back.png"
+                   HeightRequest="25"
+                   HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Grupo Castro Fallas"
+                   TextColor="Red"
+                   HorizontalOptions="Center"
+                   FontSize="25"/>
+        </Grid>
+        <CollectionView Grid.Row="1"
+                        Margin="30"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        SelectionMode="None"
+                        ItemsSource="{Binding DirectorioInterno}">
+            <CollectionView.Header>
+                <Label Text="Directorio Interno"
+                       TextColor="Black"
+                       FontSize="18"
+                       FontAttributes="Bold"/>
+            </CollectionView.Header>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="20"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame HasShadow="True"
+                           BackgroundColor="Transparent"
+                           VerticalOptions="StartAndExpand"
+                           HorizontalOptions="FillAndExpand"
+                           Padding="0">
+                        <Grid VerticalOptions="StartAndExpand"
+                              HorizontalOptions="FillAndExpand">
+                            <xct:Expander x:Name="MainExpander"
+                                          Tapped="MainExpander_Tapped"
+                                          CollapseAnimationLength="500">
+                                <xct:Expander.Header>
+                                    <Grid HorizontalOptions="FillAndExpand"
+                                          BackgroundColor="White">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout HorizontalOptions="Start"
+                                                     VerticalOptions="Center"
+                                                     Margin="20">
+                                            <Label Text="{Binding Puesto}"
+                                                   TextColor="Black"
+                                                   FontSize="25"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Center"/>
+                                        </StackLayout>
+                                    </Grid>
+                                </xct:Expander.Header>
+                                <Grid RowSpacing="0"
+                                      HorizontalOptions="FillAndExpand"
+                                      HeightRequest="240">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid x:Name="DetailsView"
+                                          BackgroundColor="#f1f1f1"
+                                          Padding="20"
+                                          IsVisible="False">
+                                        <StackLayout>
+                                            <Label Text="{Binding Nombre}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   FontAttributes="Bold"
+                                                   Opacity="0.85"/>
+                                            <Label Text="{Binding Numero}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   Opacity="0.85"/>
+                                            <Label Text="{Binding Correo}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   Opacity="0.85"/>
+                                        </StackLayout>
+                                    </Grid>
+                                </Grid>
+                            </xct:Expander>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
