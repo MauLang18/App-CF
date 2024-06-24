@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:st="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="App_CF.View.WHSDetailPage">
+    <Grid HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Image Aspect="AspectFill"
+               Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               Source="{Binding MainImage}"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               st:Transition.Name="PropertyImage"/>
+        <ImageButton BackgroundColor="Transparent"
+                     Aspect="Fill"
+                     Source="back.png"
+                     Margin="25"
+                     WidthRequest="30"
+                     HeightRequest="30"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Start"
+                     Command="{Binding GoBackCommand}"/>
+        <StackLayout Grid.Row="0"
+                     Grid.Column="1"
+                     Orientation="Vertical"
+                     VerticalOptions="Center"
+                     HorizontalOptions="End"
+                     Spacing="10">
+            <Image Source="{Binding Imagen1}"
+                   WidthRequest="50"
+                   HeightRequest="50"
+                   Aspect="AspectFill"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangeImageCommand}" CommandParameter="{Binding Imagen1}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Imagen2}"
+                   WidthRequest="50"
+                   HeightRequest="50"
+                   Aspect="AspectFill"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangeImageCommand}" CommandParameter="{Binding Imagen2}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Imagen3}"
+                   WidthRequest="50"
+                   HeightRequest="50"
+                   Aspect="AspectFill"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangeImageCommand}" CommandParameter="{Binding Imagen3}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Imagen4}"
+                   WidthRequest="50"
+                   HeightRequest="50"
+                   Aspect="AspectFill"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangeImageCommand}" CommandParameter="{Binding Imagen4}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Imagen5}"
+                   WidthRequest="50"
+                   HeightRequest="50"
+                   Aspect="AspectFill"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangeImageCommand}" CommandParameter="{Binding Imagen5}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
+        <pv:PancakeView x:Name="DetailsView"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="30,30,0,0"
+                        Padding="35,35,35,0"
+                        Margin="0,-40,0,0"
+                        BackgroundColor="White"
+                        VerticalOptions="FillAndExpand">
+            <ScrollView HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        VerticalScrollBarVisibility="Never">
+                <StackLayout Spacing="15"
+                             HorizontalOptions="FillAndExpand">
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal"
+                                     Spacing="5"
+                                     HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Model.Idtra}"
+                                   FontSize="20"
+                                   TextColor="Black"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"/>
+                            <Label Text="# WHS:"
+                                   FontSize="20"
+                                   TextColor="Black"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"/>
+                            <Label Text="{Binding Model.NumeroWHS}"
+                                   FontSize="20"
+                                   TextColor="Black"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+                    <StackLayout Grid.Row="1"
+                                 Spacing="15">
+                        <Label Text="{Binding Model.NombreCliente}"
+                               FontSize="15"
+                               TextColor="#515151"/>
+                        <Label Text="{Binding Model.FechaCreacionAuditoria}"
+                               FontSize="12"
+                               TextColor="#707070"/>
+                    </StackLayout>
+                    <BoxView HeightRequest="1"
+                             VerticalOptions="Start"
+                             HorizontalOptions="FillAndExpand"
+                             BackgroundColor="#E4E4E4"/>
+                    <Label Text="Tipo Registro:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="{Binding Model.TipoRegistro}"
+                           FontSize="15"
+                           TextColor="#515151"/>
+                    <Label Text="Status WHS:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="{Binding Model.StatusWHS}"
+                           FontSize="15"
+                           TextColor="#515151"/>
+                    <Label Text="PO:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="{Binding Model.Po}"
+                           FontSize="15"
+                           TextColor="#515151"/>
+                    <Label Text="POL:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="{Binding Model.Pol}"
+                           FontSize="15"
+                           TextColor="#515151"/>
+                    <Label Text="POD:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="{Binding Model.Pod}"
+                           FontSize="15"
+                           TextColor="#515151"/>
+                    <Label Text="Cantidad Bultos:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="{Binding Model.CantidadBultos}"
+                           FontSize="15"
+                           TextColor="#515151"/>
+                    <Label Text="Tipo Bultos:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="{Binding Model.TipoBultos}"
+                           FontSize="15"
+                           TextColor="#515151"/>
+                    <Label Text="Detalle:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="{Binding Model.Detalle}"
+                           FontSize="15"
+                           TextColor="#515151"/>
+                    <Label Text="Vinculacion Otro Registro:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="{Binding Model.VinculacionOtroRegistro}"
+                           FontSize="15"
+                           TextColor="#515151"/>
+                    <BoxView HeightRequest="1"
+                             VerticalOptions="Start"
+                             HorizontalOptions="FillAndExpand"
+                             BackgroundColor="#E4E4E4"/>
+                    <Label Text="Whs Receipt:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="{Binding WhsReceiptURL}"
+                           FontSize="15"
+                           TextColor="Blue">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding WhsReceiptCommand}"
+                                                  CommandParameter="{Binding WhsReceiptURL}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <WebView HorizontalOptions="FillAndExpand"
+                             Source="{Binding WhsReceipt}"
+                             VerticalOptions="FillAndExpand"
+                             HeightRequest="500"/>
+                    <BoxView HeightRequest="1"
+                             VerticalOptions="Start"
+                             HorizontalOptions="FillAndExpand"
+                             BackgroundColor="#E4E4E4"/>
+                    <Label Text="Documento Registro:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="{Binding DocumentoregistroURL}"
+                           FontSize="15"
+                           TextColor="Blue">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DocumentoregistroCommand}"
+                                                  CommandParameter="{Binding DocumentoregistroURL}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <WebView HorizontalOptions="FillAndExpand"
+                             Source="{Binding Documentoregistro}"
+                             VerticalOptions="FillAndExpand"
+                             HeightRequest="500"/>
+                </StackLayout>
+            </ScrollView>
+        </pv:PancakeView>
+    </Grid>
+</ContentPage>

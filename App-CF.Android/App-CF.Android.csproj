@@ -120,5 +120,13 @@
     <AndroidResource Include="Resources\drawable\transportation.png" />
     <AndroidResource Include="Resources\drawable\warehouse.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\china.png" />
+    <AndroidResource Include="Resources\drawable\crc.png" />
+    <AndroidResource Include="Resources\drawable\guatemala.png" />
+    <AndroidResource Include="Resources\drawable\honduras.png" />
+    <AndroidResource Include="Resources\drawable\panama.png" />
+    <AndroidResource Include="Resources\drawable\usa.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

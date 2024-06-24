@@ -1,11 +1,7 @@
-﻿using App_CF.Data;
-using App_CF.Model;
-using App_CF.View;
-using System.Collections.Generic;
+﻿using App_CF.Model;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace App_CF.ViewModel
