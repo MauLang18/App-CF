@@ -73,41 +73,60 @@
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-
-                                                <Label Text="POL: {Binding Pol}"
+                                                <Label Text="POL:"
                                                        Grid.Row="0"
                                                        Grid.Column="0"
-                                                       TextColor="White"
-                                                       FontSize="20"
+                                                       TextColor="Black"
+                                                       FontSize="18"
                                                        FontAttributes="Bold"
-                                                       BackgroundColor="Blue"
                                                        Padding="5"/>
-                                                <Label Text="POE: {Binding Poe}"
+                                                <Label Text="{Binding Pol}"
                                                        Grid.Row="0"
                                                        Grid.Column="1"
-                                                       TextColor="White"
-                                                       FontSize="20"
-                                                       FontAttributes="Bold"
-                                                       BackgroundColor="Blue"
+                                                       TextColor="Black"
+                                                       FontSize="18"
                                                        Padding="5"/>
-                                                <Label Text="Transporte: {Binding Transporte}"
+                                                <Label Text="POE:"
                                                        Grid.Row="1"
                                                        Grid.Column="0"
-                                                       TextColor="White"
-                                                       FontSize="20"
+                                                       TextColor="Black"
+                                                       FontSize="18"
                                                        FontAttributes="Bold"
-                                                       BackgroundColor="Blue"
                                                        Padding="5"/>
-                                                <Label Text="Modalidad: {Binding Modalidad}"
+                                                <Label Text="{Binding Pod}"
                                                        Grid.Row="1"
                                                        Grid.Column="1"
-                                                       TextColor="White"
-                                                       FontSize="20"
+                                                       TextColor="Black"
+                                                       FontSize="18"
+                                                       Padding="5"/>
+                                                <Label Text="Transporte:"
+                                                       Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       TextColor="Black"
+                                                       FontSize="18"
                                                        FontAttributes="Bold"
-                                                       BackgroundColor="Blue"
+                                                       Padding="5"/>
+                                                <Label Text="{Binding Transporte}"
+                                                       Grid.Row="2"
+                                                       Grid.Column="1"
+                                                       TextColor="Black"
+                                                       FontSize="18"
+                                                       Padding="5"/>
+                                                <Label Text="Modalidad:"
+                                                       Grid.Row="3"
+                                                       Grid.Column="0"
+                                                       TextColor="Black"
+                                                       FontSize="18"
+                                                       FontAttributes="Bold"
+                                                       Padding="5"/>
+                                                <Label Text="{Binding Modalidad}"
+                                                       Grid.Row="3"
+                                                       Grid.Column="1"
+                                                       TextColor="Black"
+                                                       FontSize="18"
                                                        Padding="5"/>
                                             </Grid>
                                         </StackLayout>
@@ -115,7 +134,7 @@
                                 </xct:Expander.Header>
                                 <Grid RowSpacing="0"
                                       HorizontalOptions="FillAndExpand"
-                                      HeightRequest="240">
+                                      HeightRequest="450">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
@@ -124,30 +143,50 @@
                                           Padding="20"
                                           IsVisible="False">
                                         <StackLayout>
-                                            <Label Text="CLOSING: {Binding Closing}"
+                                            <Label Text="CLOSING:"
                                                    TextColor="Black"
                                                    FontSize="15"
                                                    FontAttributes="Bold"
                                                    Opacity="0.85"/>
-                                            <Label Text="ETD: {Binding Etd}"
+                                            <Label Text="{Binding Closing}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   Opacity="0.85"/>
+                                            <Label Text="ETD:"
                                                    TextColor="Black"
                                                    FontSize="15"
                                                    FontAttributes="Bold"
                                                    Opacity="0.85"/>
-                                            <Label Text="ETA: {Binding Eta}"
+                                            <Label Text="{Binding Etd}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   Opacity="0.85"/>
+                                            <Label Text="ETA:"
                                                    TextColor="Black"
                                                    FontSize="15"
                                                    FontAttributes="Bold"
                                                    Opacity="0.85"/>
-                                            <Label Text="CARRIER: {Binding Carrier}"
+                                            <Label Text="{Binding Eta}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   Opacity="0.85"/>
+                                            <Label Text="CARRIER:"
                                                    TextColor="Black"
                                                    FontSize="15"
                                                    FontAttributes="Bold"
                                                    Opacity="0.85"/>
-                                            <Label Text="VESSEL: {Binding Vessel}"
+                                            <Label Text="{Binding Carrier}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   Opacity="0.85"/>
+                                            <Label Text="VESSEL:"
                                                    TextColor="Black"
                                                    FontSize="15"
                                                    FontAttributes="Bold"
+                                                   Opacity="0.85"/>
+                                            <Label Text="{Binding Vessel}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
                                                    Opacity="0.85"/>
                                         </StackLayout>
                                     </Grid>

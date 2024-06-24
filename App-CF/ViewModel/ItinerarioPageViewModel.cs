@@ -8,7 +8,7 @@ namespace App_CF.ViewModel
 {
     public class ItinerarioPageViewModel : BaseViewModel
     {
-        #region VARIABLES
+        #region Variables
         ObservableCollection<string> _PolOptions;
         ObservableCollection<string> _PodOptions;
         ObservableCollection<string> _TransporteOptions;
@@ -17,10 +17,9 @@ namespace App_CF.ViewModel
         string _SelectedPodOption;
         string _SelectedTransporteOption;
         string _SelectedModalidadOption;
-        int _CurrentStep;
         #endregion
 
-        #region CONSTRUCTOR
+        #region Constructor
         public ItinerarioPageViewModel(INavigation navigation)
         {
             Navigation = navigation;
@@ -28,102 +27,57 @@ namespace App_CF.ViewModel
         }
         #endregion
 
-        #region OBJETOS
+        #region Objetos
         public ObservableCollection<string> PolOptions
         {
             get => _PolOptions;
-            set
-            {
-                SetValue(ref _PolOptions, value);
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _PolOptions, value);
         }
 
         public ObservableCollection<string> PodOptions
         {
             get => _PodOptions;
-            set
-            {
-                SetValue(ref _PodOptions, value);
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _PodOptions, value);
         }
 
         public ObservableCollection<string> TransporteOptions
         {
             get => _TransporteOptions;
-            set
-            {
-                SetValue(ref _TransporteOptions, value);
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _TransporteOptions, value);
         }
 
         public ObservableCollection<string> ModalidadOptions
         {
             get => _ModalidadOptions;
-            set
-            {
-                SetValue(ref _ModalidadOptions, value);
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _ModalidadOptions, value);
         }
 
         public string SelectedPolOption
         {
             get => _SelectedPolOption;
-            set
-            {
-                SetValue(ref _SelectedPolOption, value);
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _SelectedPolOption, value);
         }
 
         public string SelectedPodOption
         {
             get => _SelectedPodOption;
-            set
-            {
-                SetValue(ref _SelectedPodOption, value);
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _SelectedPodOption, value);
         }
 
         public string SelectedTransporteOption
         {
             get => _SelectedTransporteOption;
-            set
-            {
-                SetValue(ref _SelectedTransporteOption, value);
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _SelectedTransporteOption, value);
         }
 
         public string SelectedModalidadOption
         {
             get => _SelectedModalidadOption;
-            set
-            {
-                SetValue(ref _SelectedModalidadOption, value);
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _SelectedModalidadOption, value);
         }
-
-        public int CurrentStep
-        {
-            get => _CurrentStep;
-            set
-            {
-                SetValue(ref _CurrentStep, value);
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(ButtonText));
-            }
-        }
-
-        public string ButtonText => CurrentStep < 3 ? "Siguiente" : "Buscar";
         #endregion
 
-        #region PROCESOS
+        #region Procesos
         public void InitializeData()
         {
             PolOptions = new ObservableCollection<string>
@@ -148,6 +102,7 @@ namespace App_CF.ViewModel
                 "Puerto Moin, CRC",
                 "Puerto Caldera, CRC"
             };
+
             PodOptions = new ObservableCollection<string>
             {
                 "CFZ, Panama",
@@ -163,12 +118,14 @@ namespace App_CF.ViewModel
                 "Wilmington (North Carolina), USA",
                 "Houston (Texas), USA"
             };
+
             TransporteOptions = new ObservableCollection<string>
             {
                 "Aereo",
                 "Maritimo",
                 "Terrestre"
             };
+
             ModalidadOptions = new ObservableCollection<string>
             {
                 "LCL",
@@ -177,8 +134,6 @@ namespace App_CF.ViewModel
                 "FTL",
                 "Multimodal"
             };
-
-            CurrentStep = 0;
         }
 
         public async Task GoBack()
@@ -186,22 +141,19 @@ namespace App_CF.ViewModel
             await Navigation.PopAsync();
         }
 
-        public async Task NextStep()
+        public async Task Search()
         {
-            if (CurrentStep < 3)
-            {
-                CurrentStep++;
-            }
-            else
-            {
-                await Navigation.PushAsync(new ItinerarioDetailPage(SelectedPolOption, SelectedPodOption, SelectedTransporteOption, SelectedModalidadOption));
-            }
+            await Navigation.PushAsync(new ItinerarioDetailPage(
+                SelectedPolOption,
+                SelectedPodOption,
+                SelectedTransporteOption,
+                SelectedModalidadOption));
         }
         #endregion
 
-        #region COMANDOS
+        #region Comandos
         public ICommand GoBackCommand => new Command(async () => await GoBack());
-        public ICommand NextCommand => new Command(async () => await NextStep());
+        public ICommand SearchCommand => new Command(async () => await Search());
         #endregion
     }
 }

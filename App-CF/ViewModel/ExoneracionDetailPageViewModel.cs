@@ -25,8 +25,8 @@ namespace App_CF.ViewModel
             Model = exoneracion;
             Solicitud = $"https://docs.google.com/viewer?url={exoneracion.Solicitud}";
             Autorizacion = $"https://docs.google.com/viewer?url={exoneracion.Autorizacion}";
-            Solicitud = exoneracion.Solicitud;
-            Autorizacion = exoneracion.Autorizacion;
+            SolicitudURL = exoneracion.Solicitud;
+            AutorizacionURL = exoneracion.Autorizacion;
             Imagen = "bg.jpg";
         }
         #endregion
