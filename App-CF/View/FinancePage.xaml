@@ -1,12 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
              x:Class="App_CF.View.FinancePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+    <Grid BackgroundColor="White"
+          RowSpacing="0"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Padding="30"
+              BackgroundColor="#A1A1A1"
+              Grid.Row="0">
+            <Image Source="back.png"
+                   HeightRequest="25"
+                   HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Grupo Castro Fallas"
+                   TextColor="Red"
+                   HorizontalOptions="Center"
+                   FontSize="25"/>
+        </Grid>
+        <StackLayout Padding="30" Grid.Row="1">
+            <Label Text="{Binding Cliente}"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="Black"/>
+            <Label Text="{Binding EstadoCuentaURL}"
+                   FontSize="15"
+                   TextColor="Blue">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding EnlaceCommand}"
+                                          CommandParameter="{Binding EstadoCuentaURL}"/>
+                </Label.GestureRecognizers>
+            </Label>
         </StackLayout>
-    </ContentPage.Content>
+        <WebView HorizontalOptions="FillAndExpand"
+                 Source="{Binding EstadoCuenta}"
+                 VerticalOptions="FillAndExpand"
+                 HeightRequest="500"
+                 Grid.Row="2"/>
+    </Grid>
 </ContentPage>

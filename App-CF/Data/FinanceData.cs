@@ -16,7 +16,7 @@ namespace App_CF.Data
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync("https://api.logisticacastrofallas.com/api/Finance?Order=desc&Cliente={cliente}");
+                    HttpResponseMessage response = await client.GetAsync($"https://api.logisticacastrofallas.com/api/Finance/Cliente?Order=desc&Cliente={cliente}");
 
                     response.EnsureSuccessStatusCode();
 

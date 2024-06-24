@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using App_CF.ViewModel;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace App_CF.View
@@ -9,6 +10,7 @@ namespace App_CF.View
         public FinancePage()
         {
             InitializeComponent();
+            BindingContext = new FinancePageViewModel(Navigation);
         }
     }
 }
