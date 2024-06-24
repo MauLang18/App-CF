@@ -6,7 +6,7 @@
              xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
              mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
              x:Class="App_CF.View.DirecInternoPage">
-    <Grid BackgroundColor="LightGray"
+    <Grid BackgroundColor="White"
           RowSpacing="0"
           HorizontalOptions="FillAndExpand"
           VerticalOptions="FillAndExpand">
