@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="App_CF.View.ItinerarioDetailPage">
+    <Grid BackgroundColor="White"
+          RowSpacing="0"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Padding="30"
+              BackgroundColor="#A1A1A1">
+            <Image Source="back.png"
+                   HeightRequest="25"
+                   HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Grupo Castro Fallas"
+                   TextColor="Red"
+                   HorizontalOptions="Center"
+                   FontSize="25"/>
+        </Grid>
+        <CollectionView Grid.Row="1"
+                        Margin="30"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        SelectionMode="None"
+                        ItemsSource="{Binding Itinerarios}">
+            <CollectionView.Header>
+                <StackLayout>
+                    <Label Text="Itinerarios"
+                           TextColor="Black"
+                           FontSize="18"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+            </CollectionView.Header>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="20"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame HasShadow="True"
+                           BackgroundColor="Transparent"
+                           VerticalOptions="StartAndExpand"
+                           HorizontalOptions="FillAndExpand"
+                           Padding="0">
+                        <Grid VerticalOptions="StartAndExpand"
+                              HorizontalOptions="FillAndExpand">
+                            <xct:Expander x:Name="MainExpander"
+                                          Tapped="MainExpander_Tapped"
+                                          CollapseAnimationLength="500">
+                                <xct:Expander.Header>
+                                    <Grid HorizontalOptions="FillAndExpand"
+                                          BackgroundColor="AliceBlue">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout HorizontalOptions="Start"
+                                                     VerticalOptions="Center"
+                                                     Margin="20">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Text="POL: {Binding Pol}"
+                                                       Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       TextColor="White"
+                                                       FontSize="20"
+                                                       FontAttributes="Bold"
+                                                       BackgroundColor="Blue"
+                                                       Padding="5"/>
+                                                <Label Text="POE: {Binding Poe}"
+                                                       Grid.Row="0"
+                                                       Grid.Column="1"
+                                                       TextColor="White"
+                                                       FontSize="20"
+                                                       FontAttributes="Bold"
+                                                       BackgroundColor="Blue"
+                                                       Padding="5"/>
+                                                <Label Text="Transporte: {Binding Transporte}"
+                                                       Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       TextColor="White"
+                                                       FontSize="20"
+                                                       FontAttributes="Bold"
+                                                       BackgroundColor="Blue"
+                                                       Padding="5"/>
+                                                <Label Text="Modalidad: {Binding Modalidad}"
+                                                       Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       TextColor="White"
+                                                       FontSize="20"
+                                                       FontAttributes="Bold"
+                                                       BackgroundColor="Blue"
+                                                       Padding="5"/>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Grid>
+                                </xct:Expander.Header>
+                                <Grid RowSpacing="0"
+                                      HorizontalOptions="FillAndExpand"
+                                      HeightRequest="240">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid x:Name="DetailsView"
+                                          BackgroundColor="#f1f1f1"
+                                          Padding="20"
+                                          IsVisible="False">
+                                        <StackLayout>
+                                            <Label Text="CLOSING: {Binding Closing}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   FontAttributes="Bold"
+                                                   Opacity="0.85"/>
+                                            <Label Text="ETD: {Binding Etd}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   FontAttributes="Bold"
+                                                   Opacity="0.85"/>
+                                            <Label Text="ETA: {Binding Eta}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   FontAttributes="Bold"
+                                                   Opacity="0.85"/>
+                                            <Label Text="CARRIER: {Binding Carrier}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   FontAttributes="Bold"
+                                                   Opacity="0.85"/>
+                                            <Label Text="VESSEL: {Binding Vessel}"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   FontAttributes="Bold"
+                                                   Opacity="0.85"/>
+                                        </StackLayout>
+                                    </Grid>
+                                </Grid>
+                            </xct:Expander>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

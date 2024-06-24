@@ -10,13 +10,13 @@ namespace App_CF.Data
 {
     public class ItinerarioData
     {
-        public static async Task<ObservableCollection<ItinerarioModel>> ListItinerario(string cliente)
+        public static async Task<ObservableCollection<ItinerarioModel>> ListItinerario(string pol, string pod, string transporte, string modalidad)
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync("https://api.logisticacastrofallas.com/api/Itinerario?Order=desc&Cliente={cliente}");
+                    HttpResponseMessage response = await client.GetAsync($"https://api.logisticacastrofallas.com/api/Itinerario?Order=Desc&PolFilter={pol}&PoeFilter={pod}&TransporteFilter={transporte}&ModalidadFilter={modalidad}");
 
                     response.EnsureSuccessStatusCode();
 

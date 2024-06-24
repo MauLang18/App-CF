@@ -1,12 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             xmlns:vm="clr-namespace:App_CF.ViewModel"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
              x:Class="App_CF.View.ItinerarioPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+    <Grid BackgroundColor="White"
+          RowSpacing="0"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Padding="30"
+              BackgroundColor="#A1A1A1"
+              Grid.Row="0">
+            <Image Source="back.png"
+                   HeightRequest="25"
+                   HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Grupo Castro Fallas"
+                   TextColor="Red"
+                   HorizontalOptions="Center"
+                   FontSize="25"/>
+        </Grid>
+        <StackLayout Grid.Row="1"
+                     Padding="20">
+            <xct:TabView SelectedIndex="{Binding CurrentStep}">
+                <xct:TabViewItem Text="POL">
+                    <Picker ItemsSource="{Binding PolOptions}"
+                            SelectedItem="{Binding SelectedPolOption}"
+                            Title="Select POL"/>
+                </xct:TabViewItem>
+                <xct:TabViewItem Text="POD">
+                    <Picker ItemsSource="{Binding PodOptions}"
+                            SelectedItem="{Binding SelectedPodOption}"
+                            Title="Select POD"/>
+                </xct:TabViewItem>
+                <xct:TabViewItem Text="Transporte">
+                    <Picker ItemsSource="{Binding TransporteOptions}"
+                            SelectedItem="{Binding SelectedTransporteOption}"
+                            Title="Select Transporte"/>
+                </xct:TabViewItem>
+                <xct:TabViewItem Text="Modalidad">
+                    <Picker ItemsSource="{Binding ModalidadOptions}"
+                            SelectedItem="{Binding SelectedModalidadOption}"
+                            Title="Select Modalidad"/>
+                </xct:TabViewItem>
+            </xct:TabView>
+            <Button Text="{Binding ButtonText}"
+                    Command="{Binding NextCommand}"/>
         </StackLayout>
-    </ContentPage.Content>
+    </Grid>
 </ContentPage>
