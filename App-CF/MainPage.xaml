@@ -5,18 +5,18 @@
              xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
              x:Class="App_CF.MainPage">
-    <Grid HorizontalOptions="FillAndExpand" 
+    <Grid HorizontalOptions="FillAndExpand"
           VerticalOptions="FillAndExpand">
-        <Image Aspect="AspectFill" 
-               Source="bg.jpg" 
-               HorizontalOptions="FillAndExpand" 
+        <Image Aspect="AspectFill"
+               Source="bg.jpg"
+               HorizontalOptions="FillAndExpand"
                VerticalOptions="FillAndExpand"/>
-        <BoxView BackgroundColor="#A1A1A1" 
+        <BoxView BackgroundColor="#A1A1A1"
                  Opacity="0.9"
                  IsEnabled="False">
         </BoxView>
         <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-            <SwipeView x:Name="MainSwipeView" 
+            <SwipeView x:Name="MainSwipeView"
                        BackgroundColor="Transparent"
                        IsEnabled="False">
                 <SwipeView.LeftItems>
@@ -72,33 +72,33 @@
                                 <RowDefinition Height="200"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Grid Padding="30" 
+                            <Grid Padding="30"
                                   BackgroundColor="#A1A1A1">
-                                <Image Source="menu.png" 
-                                       HeightRequest="25" 
+                                <Image Source="menu.png"
+                                       HeightRequest="25"
                                        HorizontalOptions="Start">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OpenSwipe"/>
                                     </Image.GestureRecognizers>
                                 </Image>
-                                <Label Text="Grupo Castro Fallas" 
-                                       TextColor="Red" 
-                                       HorizontalOptions="Center" 
+                                <Label Text="Grupo Castro Fallas"
+                                       TextColor="Red"
+                                       HorizontalOptions="Center"
                                        FontSize="25"/>
                                 <ImageButton Source="profile.png"
                                              x:Name="btnLogin"
                                              Command="{Binding LoginCommand}"
                                              WidthRequest="35"
-                                             HeightRequest="35" 
+                                             HeightRequest="35"
                                              BackgroundColor="Transparent"
                                              HorizontalOptions="End"/>
                             </Grid>
-                            <StackLayout Grid.Row="1" 
+                            <StackLayout Grid.Row="1"
                                          Margin="0,20,0,0">
-                                <Label Text="Noticias recientes" 
-                                       FontSize="30" 
-                                       FontAttributes="Bold" 
-                                       HorizontalOptions="Center" 
+                                <Label Text="Noticias recientes"
+                                       FontSize="30"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
                                        TextColor="Black"/>
                                 <CollectionView ItemsSource="{Binding LatestNews}"
                                                 x:Name="ListLatestNews"
@@ -114,9 +114,9 @@
                                                             Margin="10"
                                                             Padding="10">
                                                 <AbsoluteLayout>
-                                                    <Image Source="{Binding Imagen}" 
-                                                           Aspect="AspectFill" 
-                                                           HeightRequest="80" 
+                                                    <Image Source="{Binding Imagen}"
+                                                           Aspect="AspectFill"
+                                                           HeightRequest="80"
                                                            WidthRequest="80"
                                                            AbsoluteLayout.LayoutBounds="0,0,1,1"
                                                            AbsoluteLayout.LayoutFlags="All">
@@ -131,10 +131,10 @@
                                 </CollectionView>
                             </StackLayout>
                             <StackLayout Grid.Row="2" Margin="0,20,0,0">
-                                <Label Text="Noticias" 
-                                       FontSize="30" 
-                                       FontAttributes="Bold" 
-                                       HorizontalOptions="Center" 
+                                <Label Text="Noticias"
+                                       FontSize="30"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
                                        TextColor="Black"/>
                                 <CollectionView ItemsSource="{Binding News}"
                                                 x:Name="ListNews"
@@ -150,20 +150,20 @@
                                                             Padding="10">
                                                 <Grid ColumnDefinitions="auto, *"
                                                       RowDefinitions="auto, auto">
-                                                    <Image Source="{Binding Imagen}" 
-                                                           Aspect="AspectFill" 
-                                                           HeightRequest="80" 
+                                                    <Image Source="{Binding Imagen}"
+                                                           Aspect="AspectFill"
+                                                           HeightRequest="80"
                                                            WidthRequest="80"
                                                            Grid.RowSpan="2"/>
-                                                    <Label Text="{Binding Titulo}" 
-                                                           FontAttributes="Bold" 
-                                                           FontSize="16" 
-                                                           TextColor="Black" 
+                                                    <Label Text="{Binding Titulo}"
+                                                           FontAttributes="Bold"
+                                                           FontSize="16"
+                                                           TextColor="Black"
                                                            Grid.Column="1"
                                                            Margin="10, 0, 0, 0"/>
-                                                    <Label Text="{Binding Subtitulo}" 
-                                                           FontSize="14" 
-                                                           TextColor="Gray" 
+                                                    <Label Text="{Binding Subtitulo}"
+                                                           FontSize="14"
+                                                           TextColor="Gray"
                                                            Grid.Column="1"
                                                            Grid.Row="1"
                                                            Margin="10, 5, 0, 0"/>
