@@ -1,6 +1,8 @@
 ﻿using App_CF.Model;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace App_CF.ViewModel
@@ -12,6 +14,8 @@ namespace App_CF.ViewModel
         string _Solicitud;
         string _Autorizacion;
         string _Imagen;
+        string _SolicitudURL;
+        string _AutorizacionURL;
         #endregion
 
         #region CONSTRUCTOR
@@ -21,6 +25,8 @@ namespace App_CF.ViewModel
             Model = exoneracion;
             Solicitud = $"https://docs.google.com/viewer?url={exoneracion.Solicitud}";
             Autorizacion = $"https://docs.google.com/viewer?url={exoneracion.Autorizacion}";
+            Solicitud = exoneracion.Solicitud;
+            Autorizacion = exoneracion.Autorizacion;
             Imagen = "bg.jpg";
         }
         #endregion
@@ -55,6 +61,26 @@ namespace App_CF.ViewModel
                 OnPropertyChanged(nameof(Imagen));
             }
         }
+
+        public string SolicitudURL
+        {
+            get => _SolicitudURL;
+            set
+            {
+                _SolicitudURL = value;
+                OnPropertyChanged(nameof(SolicitudURL));
+            }
+        }
+
+        public string AutorizacionURL
+        {
+            get => _AutorizacionURL;
+            set
+            {
+                _AutorizacionURL = value;
+                OnPropertyChanged(nameof(AutorizacionURL));
+            }
+        }
         #endregion
 
         #region PROCESOS
@@ -62,10 +88,22 @@ namespace App_CF.ViewModel
         {
             await Navigation.PopAsync();
         }
+
+        public void OpenUrlSolicitud()
+        {
+            Launcher.OpenAsync(new Uri(SolicitudURL));
+        }
+
+        public void OpenUrlAutorizacion()
+        {
+            Launcher.OpenAsync(new Uri(AutorizacionURL));
+        }
         #endregion
 
         #region COMANDOS
         public ICommand GoBackCommand => new Command(async () => await GoBack());
+        public ICommand SolicitudCommand => new Command(OpenUrlSolicitud);
+        public ICommand AutorizacionCommand => new Command(OpenUrlAutorizacion);
         #endregion
     }
 }

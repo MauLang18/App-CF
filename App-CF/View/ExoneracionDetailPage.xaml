@@ -133,6 +133,14 @@
                            FontSize="15"
                            FontAttributes="Bold"
                            TextColor="Black"/>
+                    <Label Text="{Binding SolicitudURL}"
+                           FontSize="15"
+                           TextColor="Blue">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SolicitudCommand}"
+                                                  CommandParameter="{Binding SolicitudURL}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                     <WebView HorizontalOptions="FillAndExpand"
                              Source="{Binding Solicitud}"
                              VerticalOptions="FillAndExpand"
@@ -149,6 +157,14 @@
                            FontSize="15"
                            FontAttributes="Bold"
                            TextColor="Black"/>
+                    <Label Text="{Binding AutorizacionURL}"
+                           FontSize="15"
+                           TextColor="Blue">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AutorizacionCommand}"
+                                                  CommandParameter="{Binding AutorizacionURL}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                     <WebView HorizontalOptions="FillAndExpand"
                              Source="{Binding Autorizacion}"
                              VerticalOptions="FillAndExpand"
