@@ -10,7 +10,7 @@
     <Grid HorizontalOptions="FillAndExpand"
           VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>

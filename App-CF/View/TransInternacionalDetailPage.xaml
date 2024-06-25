@@ -42,7 +42,7 @@
                 <StackLayout Spacing="15"
                              HorizontalOptions="FillAndExpand">
                     <Grid HorizontalOptions="FillAndExpand">
-                        <StackLayout Orientation="Horizontal"
+                        <StackLayout Orientation="Vertical"
                                      Spacing="5"
                                      HorizontalOptions="FillAndExpand">
                             <Label Text="{Binding Model.title}"

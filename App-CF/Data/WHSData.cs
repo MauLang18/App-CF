@@ -31,6 +31,7 @@ namespace App_CF.Data
                             {
                                 Id = nd.Id,
                                 Idtra = nd.Idtra,
+                                NumeroWHS = nd.NumeroWHS,
                                 Cliente = nd.Cliente,
                                 NombreCliente = nd.NombreCliente,
                                 TipoRegistro = nd.TipoRegistro,

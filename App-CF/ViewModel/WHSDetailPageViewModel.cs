@@ -10,6 +10,7 @@ namespace App_CF.ViewModel
     public class WHSDetailPageViewModel : BaseViewModel
     {
         #region VARIABLES
+        public WHSModel Model { get; set; }
         string _Imagen1;
         string _Imagen2;
         string _Imagen3;
@@ -26,7 +27,7 @@ namespace App_CF.ViewModel
         public WHSDetailPageViewModel(INavigation navigation, WHSModel model)
         {
             Navigation = navigation;
-
+            Model = model;
             Imagen1 = model.Imagen1;
             Imagen2 = model.Imagen2;
             Imagen3 = model.Imagen3;

@@ -85,7 +85,7 @@
                                 </xct:Expander.Header>
                                 <Grid RowSpacing="0"
                                       HorizontalOptions="FillAndExpand"
-                                      HeightRequest="240">
+                                      HeightRequest="340">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
