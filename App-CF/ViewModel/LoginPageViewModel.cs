@@ -49,15 +49,18 @@ namespace App_CF.ViewModel
         {
             ApiResponseToken response = await LoginData.Login(Correo, Pass);
             Console.WriteLine(Correo, Pass);
-            if (response is null)
+
+            if (response == null || response.Data == null)
             {
                 await DisplayAlert("Usuario y/o contraseña incorrectas", "", "OK");
             }
             else
             {
-                await SecureStorage.SetAsync("token", response.Data.ToString());
+                SecureStorage.RemoveAll();
+                await SecureStorage.SetAsync("token", response.Data);
                 await Navigation.PushAsync(new MainPage());
             }
+
         }
         #endregion
 

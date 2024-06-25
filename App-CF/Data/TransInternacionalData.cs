@@ -1,12 +1,12 @@
-﻿using App_CF.Model;
+﻿using App_CF.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace App_CF.Data
 {
@@ -22,62 +22,87 @@ namespace App_CF.Data
         private static Dictionary<string, string> TamanoEquipo;
         private static Dictionary<string, string> Transporte;
 
-        static TransInternacionalData()
+        private static bool dictionariesLoaded = false;
+
+        public TransInternacionalData()
         {
-            CantEquipo = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("cantEquipo.json"));
-            Destino = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("destino.json"));
-            Incoterm = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("incoterm.json"));
-            Origen = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("origen.json"));
-            Poe = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("poe.json"));
-            Pol = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("pol.json"));
-            Status = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("status.json"));
-            TamanoEquipo = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("tamanoEquipo.json"));
-            Transporte = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("transporte.json"));
+            LoadDictionariesAsync();
+        }
+
+        private async Task LoadDictionariesAsync()
+        {
+            try
+            {
+                if (!dictionariesLoaded)
+                {
+                    CantEquipo = await LoadDictionaryAsync("cantEquipo.json");
+                    Destino = await LoadDictionaryAsync("destino.json");
+                    Incoterm = await LoadDictionaryAsync("incoterm.json");
+                    Origen = await LoadDictionaryAsync("origen.json");
+                    Poe = await LoadDictionaryAsync("poe.json");
+                    Pol = await LoadDictionaryAsync("pol.json");
+                    Status = await LoadDictionaryAsync("status.json");
+                    TamanoEquipo = await LoadDictionaryAsync("tamanoEquipo.json");
+                    Transporte = await LoadDictionaryAsync("transporte.json");
+
+                    dictionariesLoaded = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException($"Error al cargar los diccionarios: {ex.Message}", ex);
+            }
+        }
+
+        private async Task<Dictionary<string, string>> LoadDictionaryAsync(string fileName)
+        {
+            string json = await DependencyService.Get<IFileHelper>().ReadTextFileAsync(fileName);
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
         }
 
         public static async Task<ObservableCollection<TransInternacionalModel>> ListTransInternacional(string cliente)
         {
             try
             {
+                await EnsureDictionariesLoaded();
+
                 using (HttpClient client = new HttpClient())
                 {
                     HttpResponseMessage response = await client.GetAsync($"https://api.logisticacastrofallas.com/api/TrackingLogin/Activo?cliente={cliente}");
-
                     response.EnsureSuccessStatusCode();
-
                     string resultado = await response.Content.ReadAsStringAsync();
 
-                    ApiResponse<DataTransInternacional> apiResponse = JsonConvert.DeserializeObject<ApiResponse<DataTransInternacional>>(resultado);
+                    var apiResponse = JsonConvert.DeserializeObject<ApiResponse2<TransInternacionalModel>>(resultado);
 
                     if (apiResponse != null && apiResponse.IsSuccess)
                     {
                         ObservableCollection<TransInternacionalModel> transInternacionalModels = new ObservableCollection<TransInternacionalModel>(
-                            apiResponse.Data.SelectMany(nd => nd.value).Select(nd => new TransInternacionalModel
+                            apiResponse.Data.Value.Select(nd => new TransInternacionalModel
                             {
                                 odataetag = nd.odataetag,
                                 new_contenedor = nd.new_contenedor,
                                 new_factura = nd.new_factura,
                                 new_bcf = nd.new_bcf,
-                                new_cantequipo = CantEquipoMapping(nd.new_cantequipo.ToString()),
+                                new_cantequipo = GetCantEquipoValue(nd.new_cantequipo.ToString()),
                                 new_commodity = nd.new_commodity,
                                 new_confirmacinzarpe = nd.new_confirmacinzarpe,
                                 new_contidadbultos = nd.new_contidadbultos,
-                                new_destino = DestinoMapping(nd.new_destino.ToString()),
+                                new_destino = GetDestinoValue(nd.new_destino.ToString()),
                                 new_eta = nd.new_eta,
                                 new_etd1 = nd.new_etd1,
                                 modifiedon = nd.modifiedon,
-                                new_incoterm = IncotermMapping(nd.new_incoterm.ToString()),
-                                new_origen = OrigenMapping(nd.new_origen.ToString()),
+                                new_incoterm = GetIncotermValue(nd.new_incoterm.ToString()),
+                                new_origen = GetOrigenValue(nd.new_origen.ToString()),
                                 new_po = nd.new_po,
-                                new_poe = PoeMapping(nd.new_poe.ToString()),
-                                new_pol = PolMapping(nd.new_pol.ToString()),
-                                new_preestado2 = StatusMapping(nd.new_preestado2.ToString()),
+                                new_poe = GetPoeValue(nd.new_poe.ToString()),
+                                new_pol = GetPolValue(nd.new_pol.ToString()),
+                                new_preestado2 = GetStatusValue(nd.new_preestado2.ToString()),
                                 new_seal = nd.new_seal,
                                 _new_shipper_value = nd._new_shipper_value,
                                 new_statuscliente = nd.new_statuscliente,
-                                new_tamaoequipo = TamanoEquipoMapping(nd.new_tamaoequipo.ToString()),
+                                new_tamaoequipo = GetTamanoEquipoValue(nd.new_tamaoequipo.ToString()),
                                 new_new_facturacompaia = nd.new_new_facturacompaia,
-                                new_transporte = TransporteMapping(nd.new_transporte.ToString()),
+                                new_transporte = GetTransporteValue(nd.new_transporte.ToString()),
                                 title = nd.title,
                                 new_lugarcolocacion = nd.new_lugarcolocacion,
                                 new_redestino = nd.new_redestino,
@@ -113,85 +138,76 @@ namespace App_CF.Data
             }
         }
 
-        private static string CantEquipoMapping(string dato)
-        {
-            if (CantEquipo.TryGetValue(dato, out string valor))
-            {
-                return valor;
-            }
-            return dato;
-        }
-
-        private static string DestinoMapping(string dato)
+        private static string GetDestinoValue(string dato)
         {
             if (Destino.TryGetValue(dato, out string valor))
-            {
                 return valor;
-            }
             return dato;
         }
 
-        private static string IncotermMapping(string dato)
+        private static string GetIncotermValue(string dato)
         {
             if (Incoterm.TryGetValue(dato, out string valor))
-            {
                 return valor;
-            }
             return dato;
         }
 
-        private static string OrigenMapping(string dato)
+        private static string GetOrigenValue(string dato)
         {
             if (Origen.TryGetValue(dato, out string valor))
-            {
                 return valor;
-            }
             return dato;
         }
 
-        private static string PoeMapping(string dato)
+        private static string GetPoeValue(string dato)
         {
             if (Poe.TryGetValue(dato, out string valor))
-            {
                 return valor;
-            }
             return dato;
         }
 
-        private static string PolMapping(string dato)
+        private static string GetPolValue(string dato)
         {
             if (Pol.TryGetValue(dato, out string valor))
-            {
                 return valor;
-            }
             return dato;
         }
 
-        private static string StatusMapping(string dato)
+        private static string GetStatusValue(string dato)
         {
             if (Status.TryGetValue(dato, out string valor))
-            {
                 return valor;
-            }
             return dato;
         }
 
-        private static string TamanoEquipoMapping(string dato)
+        private static string GetTamanoEquipoValue(string dato)
         {
             if (TamanoEquipo.TryGetValue(dato, out string valor))
-            {
                 return valor;
-            }
             return dato;
         }
 
-        private static string TransporteMapping(string dato)
+        private static string GetTransporteValue(string dato)
         {
             if (Transporte.TryGetValue(dato, out string valor))
-            {
                 return valor;
-            }
             return dato;
+        }
+
+        public static string GetCantEquipoValue(string key)
+        {
+            if (CantEquipo != null && CantEquipo.ContainsKey(key))
+                return CantEquipo[key];
+            else
+                return key;
+        }
+
+        private static async Task EnsureDictionariesLoaded()
+        {
+            if (!dictionariesLoaded)
+            {
+                await new TransInternacionalData().LoadDictionariesAsync();
+            }
         }
     }
 }

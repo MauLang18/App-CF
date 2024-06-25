@@ -9,6 +9,7 @@ namespace App_CF.ViewModel
     {
         #region VARIABLES
         public TransInternacionalModel Model { get; set; }
+        string _Imagen;
         #endregion
 
         #region CONSTRUCTOR

@@ -69,11 +69,21 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileHelper.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\cantEquipo.json" />
+    <AndroidAsset Include="Assets\destino.json" />
+    <AndroidAsset Include="Assets\incoterm.json" />
+    <AndroidAsset Include="Assets\origen.json" />
+    <AndroidAsset Include="Assets\poe.json" />
+    <AndroidAsset Include="Assets\pol.json" />
+    <AndroidAsset Include="Assets\status.json" />
+    <AndroidAsset Include="Assets\tamanoEquipo.json" />
+    <AndroidAsset Include="Assets\transporte.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

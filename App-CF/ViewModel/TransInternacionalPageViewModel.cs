@@ -61,7 +61,7 @@ namespace App_CF.ViewModel
         #endregion
 
         #region COMANDOS
-        public ICommand DetalleCommand => new Command<ExoneracionModel>(async (p) => await Detalle(p));
+        public ICommand DetalleCommand => new Command<TransInternacionalModel>(async (p) => await Detalle(p));
         public ICommand GoBackCommand => new Command(async () => await GoBack());
         #endregion
     }
