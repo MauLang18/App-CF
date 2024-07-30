@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
-             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
-             x:Class="App_CF.View.WHSPage">
+             mc:Ignorable="d"
+             x:Class="App_CF.View.WHSPage"
+             NavigationPage.HasNavigationBar="False"
+             x:Name="WHSPageRoot">
     <Grid BackgroundColor="White"
           RowSpacing="0"
           HorizontalOptions="FillAndExpand"
@@ -33,65 +33,26 @@
               Padding="10"
               ColumnSpacing="10"
               RowSpacing="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Center">
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding MiamiCommand}"/>
-                </StackLayout.GestureRecognizers>
-                <Image Source="usa.png" WidthRequest="100" HeightRequest="100"/>
-                <Label Text="Miami, USA" HorizontalOptions="Center"/>
-            </StackLayout>
-            <StackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="Center">
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding CFZCommand}"/>
-                </StackLayout.GestureRecognizers>
-                <Image Source="panama.png" WidthRequest="100" HeightRequest="100"/>
-                <Label Text="CFZ, Panama" HorizontalOptions="Center"/>
-            </StackLayout>
-            <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="Center">
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SJOCommand}"/>
-                </StackLayout.GestureRecognizers>
-                <Image Source="crc.png" WidthRequest="100" HeightRequest="100"/>
-                <Label Text="SJO, CRC" HorizontalOptions="Center"/>
-            </StackLayout>
-            <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="Center">
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NingboCommand}"/>
-                </StackLayout.GestureRecognizers>
-                <Image Source="china.png" WidthRequest="100" HeightRequest="100"/>
-                <Label Text="Ningbo, China" HorizontalOptions="Center"/>
-            </StackLayout>
-            <StackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="Center">
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ShanghaiCommand}"/>
-                </StackLayout.GestureRecognizers>
-                <Image Source="china.png" WidthRequest="100" HeightRequest="100"/>
-                <Label Text="Shanghai, China" HorizontalOptions="Center"/>
-            </StackLayout>
-            <StackLayout Grid.Row="2" Grid.Column="1" HorizontalOptions="Center">
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GuatemalaCommand}"/>
-                </StackLayout.GestureRecognizers>
-                <Image Source="guatemala.png" WidthRequest="100" HeightRequest="100"/>
-                <Label Text="Ciudad Guatemala, Guatemala" HorizontalOptions="Center"/>
-            </StackLayout>
-            <StackLayout Grid.Row="3" Grid.Column="0" HorizontalOptions="Center">
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding HondurasCommand}"/>
-                </StackLayout.GestureRecognizers>
-                <Image Source="honduras.png" WidthRequest="100" HeightRequest="100"/>
-                <Label Text="San Pedro Sula, Honduras" HorizontalOptions="Center"/>
-            </StackLayout>
+            <CollectionView ItemsSource="{Binding WhsList}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout HorizontalOptions="Center" Padding="10">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference WHSPageRoot}, Path=BindingContext.NavigateToWHSListPageCommand}"
+                                                      CommandParameter="{Binding Nombre}"/>
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="{Binding ImageUrl}" WidthRequest="100" HeightRequest="100"/>
+                            <Label Text="{Binding Nombre}"
+                                   TextColor="Black"
+                                   FontSize="12"
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
     </Grid>
 </ContentPage>

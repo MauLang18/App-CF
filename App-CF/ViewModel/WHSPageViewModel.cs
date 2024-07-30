@@ -1,4 +1,9 @@
-﻿using App_CF.View;
+﻿using App_CF.Data;
+using App_CF.Model;
+using App_CF.View;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -8,71 +13,63 @@ namespace App_CF.ViewModel
     public class WHSPageViewModel : BaseViewModel
     {
         #region VARIABLES
-
+        ObservableCollection<PuertoModel> _whsList;
         #endregion
 
         #region CONSTRUCTOR
         public WHSPageViewModel(INavigation navigation)
         {
             Navigation = navigation;
+            Mostrar();
         }
         #endregion
 
         #region OBJETOS
-
+        public ObservableCollection<PuertoModel> WhsList
+        {
+            get { return _whsList; }
+            set
+            {
+                _whsList = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region PROCESOS
+
+        public async void Mostrar()
+        {
+            var whsData = await OrigenData.GetFilteredWhs();
+            var paisData = await OrigenData.GetPaises();
+
+            foreach (var whs in whsData)
+            {
+                var paisName = whs.Nombre.Split(',').Last().Trim();
+                var pais = paisData.FirstOrDefault(p => p.Description.Equals(paisName, StringComparison.OrdinalIgnoreCase));
+                if (pais != null)
+                {
+                    whs.ImageUrl = pais.Id;
+                }
+            }
+
+            WhsList = whsData;
+        }
+
         public async Task GoBack()
         {
             await Navigation.PopAsync();
         }
 
-        public async Task Guatemala()
+        public async Task NavigateToWHSListPage(string location)
         {
-            await Navigation.PushAsync(new WHSListPage("Ciudad Guatemala, Guatemala"));
-        }
-
-        public async Task Honduras()
-        {
-            await Navigation.PushAsync(new WHSListPage("San Pedro Sula, Honduras"));
-        }
-
-        public async Task USA()
-        {
-            await Navigation.PushAsync(new WHSListPage("Miami, USA"));
-        }
-
-        public async Task Panama()
-        {
-            await Navigation.PushAsync(new WHSListPage("CFZ, Panama"));
-        }
-
-        public async Task CRC()
-        {
-            await Navigation.PushAsync(new WHSListPage("SJO, CRC"));
-        }
-
-        public async Task Ningbo()
-        {
-            await Navigation.PushAsync(new WHSListPage("Ningbo, China"));
-        }
-
-        public async Task Shanghai()
-        {
-            await Navigation.PushAsync(new WHSListPage("Shanghai, China"));
+            await Navigation.PushAsync(new WHSListPage(location));
         }
         #endregion
 
         #region COMANDOS
         public ICommand GoBackCommand => new Command(async () => await GoBack());
-        public ICommand HondurasCommand => new Command(async () => await Honduras());
-        public ICommand GuatemalaCommand => new Command(async () => await Guatemala());
-        public ICommand ShanghaiCommand => new Command(async () => await Shanghai());
-        public ICommand NingboCommand => new Command(async () => await Ningbo());
-        public ICommand SJOCommand => new Command(async () => await CRC());
-        public ICommand CFZCommand => new Command(async () => await Panama());
-        public ICommand MiamiCommand => new Command(async () => await USA());
+        public ICommand NavigateToWHSListPageCommand => new Command<string>(async (location) => await NavigateToWHSListPage(location));
         #endregion
     }
 }
