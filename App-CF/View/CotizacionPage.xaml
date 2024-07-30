@@ -1,12 +1,115 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
              x:Class="App_CF.View.CotizacionPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <Grid BackgroundColor="White"
+          RowSpacing="0"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Padding="30" BackgroundColor="#A1A1A1">
+            <Image Source="back.png"
+                   HeightRequest="25"
+                   HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Grupo Castro Fallas"
+                   TextColor="Red"
+                   HorizontalOptions="Center"
+                   FontSize="25"/>
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <StackLayout Padding="20">
+                <Entry x:Name="NombreEntry" Placeholder="Nombre Empresa" />
+                <Entry x:Name="TelefonoEntry" Placeholder="Teléfono" Keyboard="Telephone" />
+                <Entry x:Name="CorreoEntry" Placeholder="Correo" Keyboard="Email" />
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="ImportacionCheckBox" />
+                    <Label Text="Importación" VerticalOptions="Center" />
+                    <CheckBox x:Name="ExportacionCheckBox" />
+                    <Label Text="Exportación" VerticalOptions="Center" />
+                </StackLayout>
+
+                <Picker x:Name="NegociacionPicker" Title="Término de Negociación">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Incoterm 1</x:String>
+                            <x:String>Incoterm 2</x:String>
+                            <!-- Agrega más términos según sea necesario -->
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Picker x:Name="ServicioPicker" Title="Servicio">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Servicio 1</x:String>
+                            <x:String>Servicio 2</x:String>
+                            <!-- Agrega más servicios según sea necesario -->
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Picker x:Name="OrigenPicker" Title="Origen">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Origen 1</x:String>
+                            <x:String>Origen 2</x:String>
+                            <!-- Agrega más orígenes según sea necesario -->
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Picker x:Name="DestinoPicker" Title="Destino">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Destino 1</x:String>
+                            <x:String>Destino 2</x:String>
+                            <!-- Agrega más destinos según sea necesario -->
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Entry x:Name="TipoProductoEntry" Placeholder="Tipo Producto" />
+                <Entry x:Name="ValorMercanciaEntry" Placeholder="Valor Mercancía" Keyboard="Numeric" />
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="SeguroCargaCheckBox" />
+                    <Label Text="Seguro de Carga" VerticalOptions="Center" />
+                    <CheckBox x:Name="TransporteNacionalCheckBox" />
+                    <Label Text="Transporte Nacional" VerticalOptions="Center" />
+                    <CheckBox x:Name="AgenciaAduanasCheckBox" />
+                    <Label Text="Agencia Aduanas" VerticalOptions="Center" />
+                    <CheckBox x:Name="AlmacenFiscalCheckBox" />
+                    <Label Text="Almacén Fiscal" VerticalOptions="Center" />
+                </StackLayout>
+                <Frame HasShadow="False"
+                       Padding="0"
+                       BorderColor="Black"
+                       Margin="0,0,0,10">
+                    <Entry x:Name="PesoEntry"
+                           Placeholder="Peso"
+                           Keyboard="Numeric"
+                           TextColor="Black"
+                           PlaceholderColor="Black"
+                           />
+                </Frame>
+                <Entry x:Name="VolumenEntry" Placeholder="Volumen" Keyboard="Numeric" />
+                <Entry x:Name="DimensionesEntry" Placeholder="Dimensiones" />
+                <Editor x:Name="ObservacionesEditor" Placeholder="Observaciones" HeightRequest="100" />
+
+                <Button Text="Enviar Cotización" Clicked="OnEnviarCotizacionClicked" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
