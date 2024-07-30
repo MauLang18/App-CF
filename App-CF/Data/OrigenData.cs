@@ -48,7 +48,7 @@ namespace App_CF.Data
             }
         }
 
-        public static async Task<ObservableCollection<PaisModel>> GetPaises()
+        public static async Task<ObservableCollection<SelectModel>> GetPaises()
         {
             try
             {
@@ -60,11 +60,50 @@ namespace App_CF.Data
 
                     string resultado = await response.Content.ReadAsStringAsync();
 
-                    var apiResponse = JsonConvert.DeserializeObject<ApiResponse<PaisModel>>(resultado);
+                    var apiResponse = JsonConvert.DeserializeObject<ApiResponse<SelectModel>>(resultado);
 
                     if (apiResponse != null && apiResponse.IsSuccess)
                     {
-                        return new ObservableCollection<PaisModel>(apiResponse.Data);
+                        return new ObservableCollection<SelectModel>(apiResponse.Data);
+                    }
+                    else
+                    {
+                        string mensaje = apiResponse != null ? apiResponse.Message : "Error desconocido en la respuesta.";
+                        throw new ApplicationException(mensaje);
+                    }
+                }
+            }
+            catch (HttpRequestException hrex)
+            {
+                throw new ApplicationException("Error al realizar la solicitud HTTP: " + hrex.Message, hrex);
+            }
+            catch (JsonException jex)
+            {
+                throw new ApplicationException("Error al deserializar la respuesta JSON: " + jex.Message, jex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Se produjo una excepción: " + ex.Message, ex);
+            }
+        }
+
+        public static async Task<ObservableCollection<SelectModel>> GetPuertos()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync("https://api.logisticacastrofallas.com/api/Pol/Select");
+
+                    response.EnsureSuccessStatusCode();
+
+                    string resultado = await response.Content.ReadAsStringAsync();
+
+                    var apiResponse = JsonConvert.DeserializeObject<ApiResponse<SelectModel>>(resultado);
+
+                    if (apiResponse != null && apiResponse.IsSuccess)
+                    {
+                        return new ObservableCollection<SelectModel>(apiResponse.Data);
                     }
                     else
                     {
