@@ -50,19 +50,19 @@
                 </StackLayout>
 
                 <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
-                    <Picker x:Name="NegociacionPicker" Title="Término de Negociación" ItemsSource="{Binding IncotermOptions}" SelectedItem="{Binding SelectedIncotermOption}" TextColor="Black"/>
+                    <Picker x:Name="NegociacionPicker" Title="Término de Negociación" ItemsSource="{Binding IncotermOptions}" SelectedItem="{Binding SelectedIncotermOption}" TextColor="Black" TitleColor="Black"/>
                 </Frame>
 
                 <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
-                    <Picker x:Name="ServicioPicker" Title="Servicio" ItemsSource="{Binding ServicioOptions}" SelectedItem="{Binding SelectedServicioOption}" TextColor="Black"/>
+                    <Picker x:Name="ServicioPicker" Title="Servicio" ItemsSource="{Binding ServicioOptions}" SelectedItem="{Binding SelectedServicioOption}" TextColor="Black" TitleColor="Black"/>
                 </Frame>
 
                 <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
-                    <Picker x:Name="OrigenPicker" Title="Origen" ItemsSource="{Binding OrigenOptions}" SelectedItem="{Binding SelectedOrigenOption}" TextColor="Black"/>
+                    <Picker x:Name="OrigenPicker" Title="Origen" ItemsSource="{Binding OrigenOptions}" SelectedItem="{Binding SelectedOrigenOption}" TextColor="Black" TitleColor="Black"/>
                 </Frame>
 
                 <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
-                    <Picker x:Name="DestinoPicker" Title="Destino" ItemsSource="{Binding DestinoOptions}" SelectedItem="{Binding SelectedDestinoOption}" TextColor="Black"/>
+                    <Picker x:Name="DestinoPicker" Title="Destino" ItemsSource="{Binding DestinoOptions}" SelectedItem="{Binding SelectedDestinoOption}" TextColor="Black" TitleColor="Black"/>
                 </Frame>
 
                 <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
