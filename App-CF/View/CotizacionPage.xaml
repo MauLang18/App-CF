@@ -1,12 +1,107 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
              x:Class="App_CF.View.CotizacionPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <Grid BackgroundColor="White"
+          RowSpacing="0"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Padding="30" BackgroundColor="#A1A1A1">
+            <Image Source="back.png"
+                   HeightRequest="25"
+                   HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Grupo Castro Fallas"
+                   TextColor="Red"
+                   HorizontalOptions="Center"
+                   FontSize="25"/>
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <StackLayout Padding="20">
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Entry x:Name="NombreEntry" Placeholder="Nombre Empresa" Text="{Binding NombreEmpresa}" TextColor="Black" PlaceholderColor="Black"/>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Entry x:Name="TelefonoEntry" Placeholder="Teléfono" Keyboard="Telephone" Text="{Binding Telefono}" TextColor="Black" PlaceholderColor="Black"/>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Entry x:Name="CorreoEntry" Placeholder="Correo" Keyboard="Email" Text="{Binding Correo}" TextColor="Black" PlaceholderColor="Black"/>
+                </Frame>
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="ImportacionCheckBox" IsChecked="{Binding Importacion}" />
+                    <Label Text="Importación" VerticalOptions="Center" TextColor="Black"/>
+                    <CheckBox x:Name="ExportacionCheckBox" IsChecked="{Binding Exportacion}" />
+                    <Label Text="Exportación" VerticalOptions="Center" TextColor="Black"/>
+                </StackLayout>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Picker x:Name="NegociacionPicker" Title="Término de Negociación" ItemsSource="{Binding IncotermOptions}" SelectedItem="{Binding SelectedIncotermOption}" TextColor="Black"/>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Picker x:Name="ServicioPicker" Title="Servicio" ItemsSource="{Binding ServicioOptions}" SelectedItem="{Binding SelectedServicioOption}" TextColor="Black"/>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Picker x:Name="OrigenPicker" Title="Origen" ItemsSource="{Binding OrigenOptions}" SelectedItem="{Binding SelectedOrigenOption}" TextColor="Black"/>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Picker x:Name="DestinoPicker" Title="Destino" ItemsSource="{Binding DestinoOptions}" SelectedItem="{Binding SelectedDestinoOption}" TextColor="Black"/>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Picker x:Name="TipoProductoPicker" Title="Tipo Producto" ItemsSource="{Binding ProductoOptions}" SelectedItem="{Binding SelectedProductoOption}" TextColor="Black"/>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Entry x:Name="ValorMercanciaEntry" Placeholder="Valor Mercancía" Keyboard="Numeric" Text="{Binding ValorMercancia}" TextColor="Black" PlaceholderColor="Black"/>
+                </Frame>
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="SeguroCargaCheckBox" IsChecked="{Binding SeguroCarga}" />
+                    <Label Text="Seguro de Carga" VerticalOptions="Center" TextColor="Black"/>
+                    <CheckBox x:Name="TransporteNacionalCheckBox" IsChecked="{Binding TransporteNacional}" />
+                    <Label Text="Transporte Nacional" VerticalOptions="Center" TextColor="Black"/>
+                    <CheckBox x:Name="AgenciaAduanasCheckBox" IsChecked="{Binding AgenciaAduanas}" />
+                    <Label Text="Agencia Aduanas" VerticalOptions="Center" TextColor="Black"/>
+                    <CheckBox x:Name="AlmacenFiscalCheckBox" IsChecked="{Binding AlmacenFiscal}" />
+                    <Label Text="Almacén Fiscal" VerticalOptions="Center" TextColor="Black"/>
+                </StackLayout>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Entry x:Name="PesoEntry" Placeholder="Peso" Keyboard="Numeric" Text="{Binding Peso}" TextColor="Black" PlaceholderColor="Black"/>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Entry x:Name="VolumenEntry" Placeholder="Volumen" Keyboard="Numeric" Text="{Binding Volumen}" TextColor="Black" PlaceholderColor="Black"/>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Entry x:Name="DimensionesEntry" Placeholder="Dimensiones" Text="{Binding Dimensiones}" TextColor="Black" PlaceholderColor="Black"/>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Editor x:Name="ObservacionesEditor" Placeholder="Observaciones" HeightRequest="100" Text="{Binding Observaciones}" TextColor="Black" PlaceholderColor="Black"/>
+                </Frame>
+
+                <Button Text="Enviar Cotización" Command="{Binding EnviarCotizacionCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

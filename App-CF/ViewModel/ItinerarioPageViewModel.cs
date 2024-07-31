@@ -116,7 +116,6 @@ namespace App_CF.ViewModel
             }
             catch (Exception ex)
             {
-                // Handle exceptions (e.g., show an error message or log)
                 System.Diagnostics.Debug.WriteLine($"Error initializing data: {ex.Message}");
             }
         }
