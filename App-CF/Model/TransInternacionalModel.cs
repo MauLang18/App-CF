@@ -1,19 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-
-public class ApiResponse2<T>
-{
-    public bool IsSuccess { get; set; }
-    public DataContainer<T> Data { get; set; }
-    public string Message { get; set; }
-    public object Errors { get; set; }
-}
-
-public class DataContainer<T>
-{
-    public string OdataContext { get; set; }
-    public List<T> Value { get; set; }
-}
 
 public class TransInternacionalModel
 {
