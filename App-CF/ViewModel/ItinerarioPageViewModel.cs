@@ -1,5 +1,8 @@
-﻿using App_CF.View;
+﻿using App_CF.Data;
+using App_CF.View;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -78,62 +81,43 @@ namespace App_CF.ViewModel
         #endregion
 
         #region Procesos
-        public void InitializeData()
+        public async Task InitializeData()
         {
-            PolOptions = new ObservableCollection<string>
+            try
             {
-                "Ningbo, China",
-                "Shanghai, China",
-                "Qingdao, China",
-                "Xiamen, China",
-                "Yantian, China",
-                "Guangzhou, China",
-                "Miami, USA",
-                "SJO, CRC",
-                "PVG, China",
-                "NKG, China",
-                "PEK, China",
-                "CFZ, Panama",
-                "Ciudad Hidalgo, MX",
-                "Ciudad de Guatemala, Guatemala",
-                "Managua, Nicaragua",
-                "San Pedro Sula, Honduras",
-                "San Salvador, El Salvador",
-                "Puerto Moin, CRC",
-                "Puerto Caldera, CRC"
-            };
+                var puertoData = await OrigenData.GetPuertos();
 
-            PodOptions = new ObservableCollection<string>
-            {
-                "CFZ, Panama",
-                "SJO, CRC",
-                "Ciudad Guatemala, Guatemala",
-                "San Pedro Sula, Honduras",
-                "San Salvador, El Salvador",
-                "Managua, Nicaragua",
-                "Newark (New Jersey), USA",
-                "Los Angeles (California), USA",
-                "Port Everglades (Florida), USA",
-                "Savannah (Georgia), USA",
-                "Wilmington (North Carolina), USA",
-                "Houston (Texas), USA"
-            };
+                if (puertoData != null && puertoData.Count > 0)
+                {
+                    PolOptions = new ObservableCollection<string>(puertoData.Select(p => p.Description));
+                    PodOptions = new ObservableCollection<string>(puertoData.Select(p => p.Description));
+                }
+                else
+                {
+                    PolOptions = new ObservableCollection<string>();
+                    PodOptions = new ObservableCollection<string>();
+                }
 
-            TransporteOptions = new ObservableCollection<string>
-            {
-                "Aereo",
-                "Maritimo",
-                "Terrestre"
-            };
+                TransporteOptions = new ObservableCollection<string>
+                {
+                    "Aereo",
+                    "Maritimo",
+                    "Terrestre"
+                };
 
-            ModalidadOptions = new ObservableCollection<string>
+                ModalidadOptions = new ObservableCollection<string>
+                {
+                    "LCL",
+                    "LTL",
+                    "FCL",
+                    "FTL",
+                    "Multimodal"
+                };
+            }
+            catch (Exception ex)
             {
-                "LCL",
-                "LTL",
-                "FCL",
-                "FTL",
-                "Multimodal"
-            };
+                System.Diagnostics.Debug.WriteLine($"Error initializing data: {ex.Message}");
+            }
         }
 
         public async Task GoBack()
