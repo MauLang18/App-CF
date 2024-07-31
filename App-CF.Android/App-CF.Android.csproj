@@ -138,5 +138,29 @@
     <AndroidResource Include="Resources\drawable\panama.png" />
     <AndroidResource Include="Resources\drawable\usa.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\mipmap-anydpi-v26\ic_launcher.xml" />
+    <Content Include="Resources\mipmap-hdpi\ic_launcher.png" />
+    <Content Include="Resources\mipmap-hdpi\ic_launcher_adaptive_back.png" />
+    <Content Include="Resources\mipmap-hdpi\ic_launcher_adaptive_fore.png" />
+    <Content Include="Resources\mipmap-mdpi\ic_launcher.png" />
+    <Content Include="Resources\mipmap-mdpi\ic_launcher_adaptive_back.png" />
+    <Content Include="Resources\mipmap-mdpi\ic_launcher_adaptive_fore.png" />
+    <Content Include="Resources\mipmap-xhdpi\ic_launcher.png" />
+    <Content Include="Resources\mipmap-xhdpi\ic_launcher_adaptive_back.png" />
+    <Content Include="Resources\mipmap-xhdpi\ic_launcher_adaptive_fore.png" />
+    <Content Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
+    <Content Include="Resources\mipmap-xxhdpi\ic_launcher_adaptive_back.png" />
+    <Content Include="Resources\mipmap-xxhdpi\ic_launcher_adaptive_fore.png" />
+    <Content Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
+    <Content Include="Resources\mipmap-xxxhdpi\ic_launcher_adaptive_back.png" />
+    <Content Include="Resources\mipmap-xxxhdpi\ic_launcher_adaptive_fore.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

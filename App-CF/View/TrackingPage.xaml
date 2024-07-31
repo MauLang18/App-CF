@@ -1,12 +1,173 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             NavigationPage.HasNavigationBar="False"
              x:Class="App_CF.View.TrackingPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <Grid BackgroundColor="White"
+          RowSpacing="0"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Padding="30" BackgroundColor="#A1A1A1">
+            <Image Source="back.png"
+                   HeightRequest="25"
+                   HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Grupo Castro Fallas"
+                   TextColor="Red"
+                   HorizontalOptions="Center"
+                   FontSize="25"/>
+        </Grid>
+        <ScrollView Grid.Row="1" Padding="30">
+            <StackLayout Spacing="10">
+                <Label Text="Elige una opción de búsqueda"
+                       FontSize="18"
+                       Margin="0,0,0,10"/>
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Picker Title="Elige una opción de búsqueda"
+                            ItemsSource="{Binding SearchOptions}"
+                            SelectedItem="{Binding SelectedSearchOption}"
+                            TextColor="Black"
+                            TitleColor="Black"/>
+                </Frame>
+                <Frame HasShadow="False" Padding="0" BorderColor="Black" Margin="0,0,0,10">
+                    <Entry Placeholder="Agrega el dato"
+                           Text="{Binding SearchText}"
+                           HorizontalOptions="FillAndExpand"
+                           TextColor="Black"
+                           PlaceholderColor="Black"/>
+                </Frame>
+                <Button Text="Buscar"
+                        Command="{Binding SearchCommand}"
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        HorizontalOptions="FillAndExpand"/>
+                <StackLayout x:Name="ResultsLayout"
+                             BindableLayout.ItemsSource="{Binding SearchResults}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Gray"
+                                   CornerRadius="5"
+                                   Margin="0,10">
+                                <StackLayout>
+                                    <Label Text="IDTRA: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding title}"
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="BL: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_bcf}"
+                                           TextColor="Black"/>
+                                    <Label Text="Contenedor: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_contenedor}"
+                                           TextColor="Black"/>
+                                    <Label Text="PO: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_po}"
+                                           TextColor="Black"/>
+                                    <Label Text="FACTURA: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_factura}"
+                                           TextColor="Black"/>
+                                    <Label Text="SHIPPER: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding _new_shipper_value}"
+                                           TextColor="Black"/>
+                                    <Label Text="ESTADO: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_preestado2}"
+                                           TextColor="Black"/>
+                                    <Label Text="STATUS: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_statuscliente}"
+                                           TextColor="Black"/>
+                                    <Label Text="ULTIMA ACTUALIZACION: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding modifiedon}"
+                                           TextColor="Black"/>
+                                    <Label Text="ORIGEN: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_origen}"
+                                           TextColor="Black"/>
+                                    <Label Text="DESTINO: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_destino}"
+                                           TextColor="Black"/>
+                                    <Label Text="PESO: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_peso}"
+                                           TextColor="Black"/>
+                                    <Label Text="TRANSPORTE: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_transporte}"
+                                           TextColor="Black"/>
+                                    <Label Text="COMMODITY: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_commodity}"
+                                           TextColor="Black"/>
+                                    <Label Text="CANTIDAD BULTOS: "
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding new_contidadbultos}"
+                                           TextColor="Black"/>
+                                    <CollectionView ItemsSource="{Binding TimelineEvents}"
+                                                    SelectionMode="None">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout Orientation="Horizontal"
+                                                             Padding="10"
+                                                             Spacing="10">
+                                                    <BoxView WidthRequest="10"
+                                                             HeightRequest="10"
+                                                             BackgroundColor="Black"
+                                                             VerticalOptions="Start"/>
+                                                    <StackLayout>
+                                                        <Label Text="{Binding Date}"
+                                                               FontSize="Small"
+                                                               TextColor="Black"/>
+                                                        <Label Text="{Binding Label}"
+                                                               FontAttributes="Bold"
+                                                               TextColor="Black"/>
+                                                        <Label Text="{Binding Description}"
+                                                               FontSize="Small"
+                                                               TextColor="Black"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
