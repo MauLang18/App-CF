@@ -25,10 +25,10 @@
                     <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
                 </Image.GestureRecognizers>
             </Image>
-            <Label Text="Antonio Zamora e Hijos, S.A."
+            <Label Text="Grupo Castro Fallas"
                    TextColor="Red"
                    HorizontalOptions="Center"
-                   FontSize="15"/>
+                   FontSize="25"/>
         </Grid>
         <StackLayout Padding="30" Grid.Row="1">
             <Label Text="{Binding Cliente}"

@@ -14,8 +14,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Padding="30"
-              BackgroundColor="#A1A1A1">
+
+        <Grid Padding="30" BackgroundColor="#A1A1A1">
             <Image Source="back.png"
                    HeightRequest="25"
                    HorizontalOptions="Start">
@@ -28,12 +28,15 @@
                    HorizontalOptions="Center"
                    FontSize="25"/>
         </Grid>
+
         <CollectionView Grid.Row="1"
                         Margin="30"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand"
                         SelectionMode="None"
-                        ItemsSource="{Binding Itinerarios}">
+                        ItemsSource="{Binding Itinerarios}"
+                        RemainingItemsThreshold="5"
+                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
             <CollectionView.Header>
                 <StackLayout>
                     <Label Text="Itinerarios"
@@ -197,5 +200,11 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <ActivityIndicator Color="Gray"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           Margin="0,0,0,20"/>
     </Grid>
 </ContentPage>
