@@ -33,7 +33,9 @@
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand"
                         SelectionMode="None"
-                        ItemsSource="{Binding Exoneraciones}">
+                        ItemsSource="{Binding Exoneraciones}"
+                        RemainingItemsThreshold="5"
+                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
             <CollectionView.Header>
                 <StackLayout>
                     <Label Text="Exoneraciones"
@@ -133,5 +135,10 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <ActivityIndicator Color="Gray"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           Margin="0,0,0,20"/>
     </Grid>
 </ContentPage>

@@ -10,13 +10,13 @@ namespace App_CF.Data
 {
     public class ExoneracionData
     {
-        public static async Task<ObservableCollection<ExoneracionModel>> ListExoneracion(string cliente)
+        public static async Task<ObservableCollection<ExoneracionModel>> ListExoneracion(string cliente, string NumPage, string NumRecordsPage)
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync($"https://api.logisticacastrofallas.com/api/Exoneracion/Cliente?Order=Desc&cliente={cliente}");
+                    HttpResponseMessage response = await client.GetAsync($"https://api.logisticacastrofallas.com/api/Exoneracion/Cliente?Order=Desc&NumPage={NumPage}&NumRecordsPage={NumRecordsPage}&cliente={cliente}");
 
                     response.EnsureSuccessStatusCode();
 

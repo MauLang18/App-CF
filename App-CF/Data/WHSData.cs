@@ -10,13 +10,13 @@ namespace App_CF.Data
 {
     public class WHSData
     {
-        public static async Task<ObservableCollection<WHSModel>> ListWHS(string cliente, string whs)
+        public static async Task<ObservableCollection<WHSModel>> ListWHS(string cliente, string whs, string NumPage, string NumRecordsPage)
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync($"https://api.logisticacastrofallas.com/api/Whs/Cliente?Order=Desc&cliente={cliente}&whs={whs}");
+                    HttpResponseMessage response = await client.GetAsync($"https://api.logisticacastrofallas.com/api/Whs/Cliente?Order=Desc&NumPage={NumPage}&NumRecordsPage={NumRecordsPage}&cliente={cliente}&whs={whs}");
 
                     response.EnsureSuccessStatusCode();
 

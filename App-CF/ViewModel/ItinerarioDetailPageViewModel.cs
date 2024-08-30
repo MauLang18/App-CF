@@ -31,7 +31,7 @@ namespace App_CF.ViewModel
             _Transporte = transporte;
             _Modalidad = modalidad;
             Itinerarios = new ObservableCollection<ItinerarioModel>();
-            RefreshData(); // Cargar los datos iniciales
+            RefreshData();
         }
         #endregion
 
@@ -62,7 +62,7 @@ namespace App_CF.ViewModel
                 return;
 
             IsBusy = true;
-            _CurrentPage = 1; // Reiniciar la página actual para la carga inicial
+            _CurrentPage = 1;
 
             try
             {
@@ -134,11 +134,8 @@ namespace App_CF.ViewModel
 
         #region COMANDOS
         public ICommand GoBackCommand => new Command(async () => await GoBack());
-
         public ICommand LoadMoreCommand => new Command(async () => await LoadMoreData());
-
         public ICommand RefreshCommand => new Command(async () => await RefreshData());
-
         #endregion
     }
 }

@@ -14,7 +14,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
         <Grid Padding="30" BackgroundColor="#A1A1A1">
             <Image Source="back.png"
                    HeightRequest="25"
@@ -28,7 +27,6 @@
                    HorizontalOptions="Center"
                    FontSize="25"/>
         </Grid>
-
         <CollectionView Grid.Row="1"
                         Margin="30"
                         HorizontalOptions="FillAndExpand"
@@ -200,7 +198,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
         <ActivityIndicator Color="Gray"
                            IsRunning="{Binding IsBusy}"
                            HorizontalOptions="Center"
