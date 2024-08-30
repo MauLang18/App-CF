@@ -13,22 +13,21 @@
             <RowDefinition Height="1.2*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Image Aspect="AspectFill" 
+        <Image Aspect="AspectFill"
                Grid.Row="0"
-                   Source="{Binding Imagen}"
-                   HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"
-                   st:Transition.Name="PropertyImage"/>
-            <ImageButton BackgroundColor="Transparent"
-                         Aspect="Fill"
-                         Source="back.png"
-                         Margin="25"
-                         WidthRequest="30"
-                         HeightRequest="30"
-                         HorizontalOptions="Start"
-                         VerticalOptions="Start"
-                         Command="{Binding GoBackCommand}"/>
-
+               Source="{Binding Imagen}"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               st:Transition.Name="PropertyImage"/>
+        <ImageButton BackgroundColor="Transparent"
+                     Aspect="Fill"
+                     Source="back.png"
+                     Margin="25"
+                     WidthRequest="30"
+                     HeightRequest="30"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Start"
+                     Command="{Binding GoBackCommand}"/>
         <pv:PancakeView x:Name="DetailsView"
                         Grid.Row="1"
                         CornerRadius="30,30,0,0"

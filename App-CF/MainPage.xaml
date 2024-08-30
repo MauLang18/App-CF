@@ -60,6 +60,15 @@
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>
                                 </StackLayout>
+                                <Label Text="Desarrollado por CustomCodeCR"
+                                       TextColor="White"
+                                       FontSize="12"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="End">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnCustomCodeTap"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </Grid>
                         </SwipeItemView>
                     </SwipeItems>

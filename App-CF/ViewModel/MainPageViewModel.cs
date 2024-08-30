@@ -93,7 +93,7 @@ namespace App_CF.ViewModel
             {
                 var menus = new List<MenuItems>
                 {
-                    new MenuItems { Name = "Home", Icon = "home.png" },
+                    new MenuItems { Name = "Home", Icon = "home.png", Command = HomeCommand },
                     new MenuItems { Name = "Perfil", Icon = "profile.png", Command = ProfileCommand },
                     new MenuItems { Name = "Transporte Internacional", Icon = "transportation.png", Command = TransporteInternacionalCommand },
                     new MenuItems { Name = "Agenciamiento Aduanal", Icon = "paper.png", Command = AgenciamientoAduanalCommand },
@@ -105,7 +105,6 @@ namespace App_CF.ViewModel
                     new MenuItems { Name = "WHS", Icon = "warehouse.png", Command = WHSCommand },
                     new MenuItems { Name = "My Finance", Icon = "finance.png", Command = MyFinanceCommand },
                     new MenuItems { Name = "Directorio Interno", Icon = "agenda.png", Command = DirectorioInternoCommand },
-
                 };
                 return menus;
             }
@@ -122,6 +121,14 @@ namespace App_CF.ViewModel
 
         public async Task Login()
         {
+            string token = SecureStorage.GetAsync("token").Result;
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                SecureStorage.Remove("token");
+                await Navigation.PushAsync(new MainPage());
+            }
+
             await Navigation.PushAsync(new LoginPage());
         }
 
@@ -193,6 +200,7 @@ namespace App_CF.ViewModel
         public ICommand RefreshCommand => new Command(async () => await RefreshData());
 
         public ICommand LoginCommand => new Command(async () => await Login());
+        public ICommand HomeCommand => new Command(async () => await Home());
         public ICommand ProfileCommand => new Command(async () => await Profile());
         public ICommand TransporteInternacionalCommand => new Command(async () => await TransInternacional());
         public ICommand AgenciamientoAduanalCommand => new Command(async () => await AgenAduanal());

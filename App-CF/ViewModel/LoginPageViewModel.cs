@@ -62,10 +62,16 @@ namespace App_CF.ViewModel
             }
 
         }
+
+        public async Task GoBack()
+        {
+            await Navigation.PopAsync();
+        }
         #endregion
 
         #region COMANDOS
         public ICommand LoginCommand => new Command(async () => await Login());
+        public ICommand GoBackCommand => new Command(async () => await GoBack());
         #endregion
     }
 }

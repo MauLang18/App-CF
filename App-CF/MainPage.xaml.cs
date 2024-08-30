@@ -42,9 +42,17 @@ namespace App_CF
             }
         }
 
-        private void Prueba(object sender, EventArgs e)
+        private async void OnCustomCodeTap(object sender, EventArgs e)
         {
-            DisplayAlert("Estoy en el box", "", "Ok.");
+            var url = "https://customcodecr.com";
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                await Xamarin.Essentials.Launcher.OpenAsync(new Uri(url));
+            }
+            else
+            {
+                await Xamarin.Essentials.Browser.OpenAsync(url);
+            }
         }
 
         private void CloseSwipe()
